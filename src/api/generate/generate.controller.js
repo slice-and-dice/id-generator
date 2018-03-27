@@ -1,11 +1,12 @@
-const { randomIdService } = require('../../services/');
-const winston = require('winston');
+const { randomIdService } = require("../../services/");
+const winston = require("winston");
 
 module.exports = () => {
   winston.info(`generate.controller called`);
 
-  let newId = randomIdService.newRandomId();
+  const newId = randomIdService.newRandomId();
+  const result = { registrationId: newId };
 
   winston.info(`generate.controller successful`);
-  return newId;
+  return result;
 };
