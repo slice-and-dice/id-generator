@@ -1,15 +1,13 @@
 #!/bin/sh
 
 echo --- Logging in to Cloud Foundry...
-"" | cf login -a api.cloud.service.gov.uk -u $EMAIL -p $PASS
+"" | cf login -a $CF_API -u $CF_EMAIL -p $CF_PASS
 
-echo --- Switching to $CF_SPACE space...
-cf target -o fsa-regulating-our-future -s $CF_SPACE
-
-echo --- Pushing app to Cloud Foundry...
-cf push
+echo --- Pushing $CF_APP_NAME to Cloud Foundry...
+cf push $CF_APP_NAME
+# cf blue-green-deploy id-generator-dev
 
 echo --- Logging out of Cloud Foundry...
 cf logout
 
-echo --- Deployment complete ($CF_SPACE).
+echo --- Deployment of $CF_APP_NAME complete.

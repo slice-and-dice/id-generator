@@ -2,15 +2,19 @@
 language: node_js
 node_js:
   - "8.9.4"
+before_install:
+  - wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+  - echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+  - sudo apt-get -qq update
+  - sudo apt-get install cf-cli
+install:
+  - bundle install --path vendor/bundle
+  - npm install
 deploy:
+	- provider: script
+    script: env CF_APP_NAME=id-generator-dev ./deploy.sh
   - provider: script
-    script: env EMAIL=$CF_EMAIL PASS=$CF_PASS CF_SPACE=dev ./deploy.sh
-    on:
-      branch: develop
-  - provider: script
-    script: env CF_SPACE=test ./deploy.sh
-    on:
-      branch: test
+    script: env CF_APP_NAME=id-generator-test ./deploy.sh
 
 # env:
 #   global:
