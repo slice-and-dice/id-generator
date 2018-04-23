@@ -4,13 +4,11 @@ node_js:
   - "8.9.4"
 deploy:
   - provider: script
-    script: echo Hello world dev
-    # script: env CF_SPACE=dev echo HELLO WORLD $CF_SPACE
+    script: env EMAIL=$CF_EMAIL PASS=$CF_PASS CF_SPACE=dev ./deploy.sh
     on:
       branch: develop
   - provider: script
-    script: echo Hello world test
-    # script: env CF_SPACE=dev echo HELLO WORLD $CF_SPACE
+    script: env CF_SPACE=test ./deploy.sh
     on:
       branch: test
 
