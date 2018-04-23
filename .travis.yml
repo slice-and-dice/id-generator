@@ -1,18 +1,18 @@
+---
 language: node_js
 node_js:
   - "lts/*"
 deploy:
-	- provider: script
-		script: echo Hello world dev
+  - provider: script
+    script: echo Hello world dev
     # script: env CF_SPACE=dev echo HELLO WORLD $CF_SPACE
-		on:
-			branch: develop
-deploy:
-	- provider: script
-		script: echo Hello world test
+    on:
+      branch: develop
+  - provider: script
+    script: echo Hello world test
     # script: env CF_SPACE=dev echo HELLO WORLD $CF_SPACE
-		on:
-			branch: test
+    on:
+      branch: test
 
 # env:
 #   global:
