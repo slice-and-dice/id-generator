@@ -7,9 +7,6 @@ before_install:
   - echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
   - sudo apt-get -qq update
   - sudo apt-get install cf-cli
-install:
-  - bundle install --path vendor/bundle
-  - npm install
 deploy:
   - provider: script
     script: env CF_APP_NAME=id-generator-dev ./deploy.sh
