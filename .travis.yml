@@ -1,0 +1,5 @@
+deploy:
+	- provider: script
+		script: env CF_SPACE=dev echo HELLO WORLD $CF_SPACE
+		on:
+			branch: develop
