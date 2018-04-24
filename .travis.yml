@@ -9,7 +9,6 @@ before_install:
   # - sudo apt-get install cf-cli
   # - pip install -U niet
 deploy:
-  deploy:
   - provider: cloudfoundry
     username: $CF_EMAIL
     password: $CF_PASS
