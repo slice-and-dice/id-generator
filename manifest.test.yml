@@ -1,0 +1,6 @@
+---
+applications:
+- name: id-generator-test
+  command: node src/index.js
+  memory: 256M
+  buildpack: nodejs_buildpack

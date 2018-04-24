@@ -3,16 +3,37 @@ language: node_js
 node_js:
   - "8.9.4"
 before_install:
-  - wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
-  - echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
-  - sudo apt-get -qq update
-  - sudo apt-get install cf-cli
+  # - wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+  # - echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+  # - sudo apt-get -qq update
+  # - sudo apt-get install cf-cli
+  # - pip install -U niet
 deploy:
-  - provider: script
-    script: env CF_APP_NAME=id-generator-dev ./deploy.sh
-  - provider: script
-    script: env CF_APP_NAME=id-generator-test ./deploy.sh
+  deploy:
+  - provider: cloudfoundry
+    username: $CF_EMAIL
+    password: $CF_PASS
+    api: $CF_API
+    organization: $CF_ORG
+    space: dev
+    manifest: manifest.dev.yml
+    on:
+      branch: develop
+  - provider: cloudfoundry
+    username: $CF_EMAIL
+    password: $CF_PASS
+    api: $CF_API
+    organization: $CF_ORG
+    space: test
+    manifest: manifest.test.yml
+    on:
+      branch: develop
 
-# env:
-#   global:
-#   - secure: 
+  # - provider: script
+  #   script: env CF_APP_NAME=id-generator-dev ./deploy.sh
+  #   on:
+  #     branch: develop
+  # - provider: script
+  #   script: env CF_APP_NAME=id-generator-test ./deploy.sh
+  #   on:
+  #     branch: develop
