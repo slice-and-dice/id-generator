@@ -5,7 +5,7 @@ module.exports = () => {
   winston.info(`generate.controller called`);
 
   const newId = randomIdService.newRandomId();
-  const result = { registrationId: newId };
+  const result = { fsa_rn: newId };
 
   winston.info(`generate.controller successful`);
   return result;
